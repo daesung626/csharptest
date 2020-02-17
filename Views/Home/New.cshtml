@@ -1,0 +1,25 @@
+@model Wedding
+
+
+
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <br>
+            <h1>Plan Your Wedding</h1>
+            <br>
+            <form asp-action="CreateWedding" asp-controllers="Home" method="POST">
+                Wedder One: <input class="form-control" asp-for="WedderOne">
+                Wedder Two: <input class="form-control" asp-for="WedderTwo">
+                Date: <input class="form-control" type="date" asp-for="Date">
+                Wedding Address: <input class="form-control" asp-for="Address">
+                <br>
+                <input type="submit" value="Create">
+            </form>
+        </div>
+        <div class="col">
+            <br>
+            <a asp-action="Dashboard">Dashboard</a>
+        </div>
+    </div>
+</div>

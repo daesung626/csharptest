@@ -1,0 +1,44 @@
+@model List<Wedding>
+
+<br>
+
+<h1>Welcome to the Wedding Planner | <a asp-action="Logout">Log Out</a></h1>
+
+<br>
+
+<table class="table table-striped table-dark">
+    <thead>
+        <tr>
+            <th scope="col">Wedding</th>
+            <th scope="col">Date</th>
+            <th scope="col">Guests</th>
+            <th scope="col">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var wedding in Model)
+        {
+        <tr>
+            <td><a asp-action="Detail" asp-controller="Home" asp-route-weddingId="@wedding.WeddingId">@wedding.WedderOne & @wedding.WedderTwo</a></td>
+            <td>@wedding.Date</td>
+            <td>@wedding.Associations.Count</td>
+            @if(wedding.UserId == ViewBag.CurrentUserId)
+            {
+                <td><a asp-action="Delete" asp-route-weddingId="@wedding.WeddingId">Delete</a></td>
+            }
+            else if(wedding.Associations.Any(i=> i.UserId == ViewBag.CurrentUserId))
+            {
+                <td><a asp-action="UnRsvp" asp-route-weddingId="@wedding.WeddingId">Un-RSVP</a></td>
+            }
+            else
+            {
+                <td><a asp-action="Rsvp" asp-route-weddingId="@wedding.WeddingId">RSVP</a></td>
+            }
+        </tr>
+        }
+    </tbody>
+</table>
+
+<br>
+
+<button><a asp-action="New">New Wedding</a></button>
